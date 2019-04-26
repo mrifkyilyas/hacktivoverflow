@@ -5,6 +5,8 @@ import register from './views/Register'
 import allQuestion from './views/Allquestion'
 import addQuestion from './views/Addquestion'
 import detailQuestion from './views/Detailquestion'
+import editQuestion from './views/Editquestion'
+import editAnswer from './views/Editanswer'
 
 Vue.use(Router)
 
@@ -45,7 +47,18 @@ export default new Router({
     path:'/',
     name:'home',
     component:allQuestion
-   }
+   },
+   {
+     path:'/edit/question/:id',
+     name:'editquestion',
+     component:editQuestion
+   },
+   {
+    path:'/edit/answer/:id',
+    name:'editanswer',
+    component:editAnswer
+  }
+
 
   ]
 })

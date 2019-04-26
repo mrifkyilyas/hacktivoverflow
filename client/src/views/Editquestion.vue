@@ -7,17 +7,17 @@
     <div class="card text-left col-6 mx-auto py-10">
       <div class="card-body">
         <form>
-          <h1>Add new Question</h1>
+          <h1>Edit Question</h1>
           <div class="form-group">
             <label for="exampleInputTitle">Title</label>
-            <input v-model="title" type="Title" class="form-control" id="exampleInputTitle" aria-describedby="TitleHelp"
+            <input v-model="title"  type="Title" class="form-control" id="exampleInputTitle" aria-describedby="TitleHelp"
               placeholder="Enter Title">
           </div>
            <div class="form-group">
             <label for="exampleInputDescription">Description</label>
             <wysiwyg v-model="text"></wysiwyg>
           </div>          
-          <button type="submit" class="btn btn-primary" @click.prevent="addQuestion">addQuestion</button>
+          <button type="submit" class="btn btn-primary" @click.prevent="editQuestion">EditQuestion</button>
         </form>
       </div>
     </div>
@@ -42,10 +42,25 @@ export default {
               title:''
           };
   }, 
+  created(){
+    this.getone()
+
+  },
   methods:{
-    addQuestion() {   
+    getone(){
+      axios.get(`${serverUrl}/question/${this.$route.params.id}`)
+       .then(({data})=>{
+         this.text = data.description
+         this.title = data.title
+       })
+       .catch(err=>{
+         console.log(err)
+       })
+
+    },
+    editQuestion() {   
       console.log(this.title,this.text)
-        axios.post(`${serverUrl}/question/`, {
+        axios.put(`${serverUrl}/question/${this.$route.params.id}`, {
             title: this.title,
             description: this.text
         },{

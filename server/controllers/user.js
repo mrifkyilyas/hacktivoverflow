@@ -29,7 +29,7 @@ class userController {
                         id:found._id
                     })
                     res.status(200).json({
-                        access_token,name:found.name
+                        access_token,name:found.name,id:found._id
                     })
                 } else {
                     res.status(400).json({

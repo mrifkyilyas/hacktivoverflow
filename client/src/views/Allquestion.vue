@@ -23,9 +23,12 @@
               <td>{{question.title}}</td>
                   </router-link>  
                   <td>{{moment(question.createdAt).fromNow()}}</td>   
-                   <router-link :to="{ name: 'detailuser', params: { id: question.user._id }}" >
+                   <router-link v-if="$store.state.idLogin==question.user._id" to="/mydetail" >
               <td>{{question.user.name}}</td>
-              </router-link>       
+              </router-link>      
+               <router-link v-else :to="{ name: 'detailuser', params: { id: question.user._id }}" >
+              <td>{{question.user.name}}</td>
+              </router-link>        
             </tr>
           </tbody>
         </table>

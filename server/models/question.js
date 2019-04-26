@@ -10,7 +10,7 @@ const QuestionSchema = new Schema({
       description: {
         type: String,
         required: [true, 'Description is required'],
-        minlength: [10, 'Description is too short'],
+        minlength: [3, 'Description is too short'],
       },
       upvotes: [{
         type: mongoose.Schema.Types.ObjectId,

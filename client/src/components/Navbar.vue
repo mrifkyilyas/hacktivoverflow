@@ -17,20 +17,22 @@
       </ul>
     </div>
     <div class="collapse navbar-collapse d-flex flex-row-reverse ">
-      <ul class="navbar-nav float-right ">
-       
-        <li class="nav-item"  v-show="ceklogin">
-          <router-link to="/question/add">
-          
+      <ul class="navbar-nav float-right ">    
+        <li class="nav-item"  v-if="$store.state.isLogin">
+           <p class="nav-link text-light "> hallo, {{$store.state.nameLogin}}</p>
+          </li>   
+        <li class="nav-item"  v-if="$store.state.isLogin">
+          <router-link to="/question/add">          
           <a class="nav-link text-light btn btn-info" href="#"> new question</a>
           </router-link>
         </li>
-         <li class="nav-item" v-show="!ceklogin">
+        
+         <li class="nav-item" v-if="$store.state.isLogin == false">
           <router-link to="/login">
           <a class="nav-link text-light" >login</a>
           </router-link>
         </li>
-        <li class="nav-item"  v-show="ceklogin">          
+        <li class="nav-item"  v-else>          
           <a class="nav-link text-light btn " @click="logout" >logout</a>       
         </li>
       </ul>
@@ -45,12 +47,13 @@ export default {
     'ceklogin'
   ],
   methods:{
-         logout() {
-            console.log('logout')
-                localStorage.clear()
-                this.$router.push('/login')
-                 this.$emit('postLogout')       
-},
+    logout(){
+      console.log('logout')
+      localStorage.clear()
+      this.$router.push('/login')
+       this.$store.commit('loginout', false); 
+     
+    }
   }
 }
 </script>

@@ -41,12 +41,13 @@ export default {
         password: this.$refs.password.value
       })
         .then(({ data }) => {
-          console.log('login berhasil')
+          console.log('login berhasil')          
+          console.log(data.id)
           localStorage.setItem('access_token', data.access_token)
           localStorage.setItem('name', data.name)
-          axios.defaults.headers.common['access_token'] = localStorage.access_token
+          localStorage.setItem('id',data.id)
+          this.$store.commit('isLoggin', true);
           this.$router.push('/')
-          this.$emit('postLogin')
         })
         .catch(err => {
           this.errorMsg = 'Wrong email/password'
